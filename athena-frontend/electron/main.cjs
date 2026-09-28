@@ -17,7 +17,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle("start-exam",async (event,name,urn)=>{
     // console.log("Exam Started",name,urn);
-    const session=fetch('http://localhost:3000/exam/start',{
+    const session=await fetch('http://localhost:3000/exam/start',{
       method:'POST',
       headers:{
         'content-type':'application/json'
@@ -25,5 +25,18 @@ app.whenReady().then(() => {
       body:JSON.stringify({'UserId':urn,'name':name})
     }).then(res=>res.json())
 
+    console.log(session)
+  })
+
+
+  ipcMain.handle("get-total-mcq",async (event)=>{
+    const totalMCQ=await fetch('http://localhost:3000/exam/mcq/total',{
+      method:'GET',
+      headers:{
+        'content-type':'application/json'
+      }
+    }).then(res=>res.json())
+
+    console.log(totalMCQ)
   })
 });
