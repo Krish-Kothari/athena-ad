@@ -17,7 +17,13 @@ app.whenReady().then(() => {
 
   ipcMain.handle("start-exam",async (event,name,urn)=>{
     // console.log("Exam Started",name,urn);
-    const session=fetch('http://localhost:3000/exam/start')
+    const session=fetch('http://localhost:3000/exam/start',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify({'UserId':urn,'name':name})
+    }).then(res=>res.json())
 
   })
 });
