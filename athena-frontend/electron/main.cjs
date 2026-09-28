@@ -15,7 +15,9 @@ app.whenReady().then(() => {
   window.on("ready-to-show", () => window.show());
   window.loadURL("http://localhost:5173/");
 
-  ipcMain.handle("start-exam",(event,name,urn)=>{
-    console.log("Exam Started",name,urn);
+  ipcMain.handle("start-exam",async (event,name,urn)=>{
+    // console.log("Exam Started",name,urn);
+    const session=fetch('http://localhost:3000/exam/start')
+
   })
 });
